@@ -15,7 +15,7 @@ import com.jike.pojo.User;
 import com.jike.service.IUserService;
 import com.jike.util.MD5Util;
 
-@Service
+@Service("iUserService")
 public class UserServiceImpl implements IUserService {
 
 	@Resource
