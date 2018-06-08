@@ -15,9 +15,6 @@ import com.google.common.cache.LoadingCache;
 
 
 
-/**
- * Created by geely
- */
 public class TokenCache {
 
     private static Logger logger = LoggerFactory.getLogger(TokenCache.class);
