@@ -1,5 +1,7 @@
 package com.jike.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.jike.pojo.Order;
 
 public interface OrderMapper {
@@ -14,4 +16,6 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+	Order selectByOrderNoAndUserId(@Param("orderNo")Long orderNo, @Param("userId")Integer userId);
 }
