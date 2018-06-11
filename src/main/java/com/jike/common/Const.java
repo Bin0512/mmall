@@ -84,7 +84,9 @@ public class Const {
         }
     }
     public interface  AlipayCallback{
-        String TRADE_STATUS_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
+    	//交易创建，等待买家付款
+    	String TRADE_STATUS_WAIT_BUYER_PAY = "WAIT_BUYER_PAY";
+        //交易支付成功
         String TRADE_STATUS_TRADE_SUCCESS = "TRADE_SUCCESS";
 
         String RESPONSE_SUCCESS = "success";
