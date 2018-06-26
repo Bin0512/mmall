@@ -40,7 +40,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	public ServerResponse<String> register(User user) {
-		//1、验证用户名、密码是否已经存在，如果存在就不能再注册
+		//1、验证用户名、邮箱是否已经存在，如果存在就不能再注册
 		ServerResponse validResponse = this.checkValid(user.getUsername(), Const.USERNAME);
 		if (!validResponse.isSuccess()) {
 			return validResponse;

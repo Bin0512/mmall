@@ -9,7 +9,10 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 //保证序列化json的时候,如果是null的对象,key也会消失
 public class ServerResponse<T> implements Serializable {
 	
-	//状态码，Forexample:成功or失败
+	/**
+	 * 
+	 * 状态码，Forexample:成功or失败
+	 */
 	private int status;
 	
 	//返回信息，Forexample:"注册成功/失败" "用户名不存在"等等；
