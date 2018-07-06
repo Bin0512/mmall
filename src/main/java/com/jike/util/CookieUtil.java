@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CookieUtil {
 	
 	//设置cookie的域，这里代表所有以“.harrymall.com”结尾的域名都能访问此cookie
-	private final static String COOKIE_DOMAIN = ".harrymmall.com";
+	private final static String COOKIE_DOMAIN = "harrymmall.com";
 	//设置cookie的键名
 	private final static String COOKIE_NAME = "mmall_login_token";
 	

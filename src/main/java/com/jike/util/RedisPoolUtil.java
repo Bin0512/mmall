@@ -7,6 +7,7 @@ import redis.clients.jedis.Jedis;
 
 /**
  * jedis api 封装
+ * 用于操作redis
  * @author Administrator
  *
  */

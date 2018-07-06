@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jike.common.Const;
+import com.jike.common.RedisShardedPool;
 import com.jike.common.ResponseCode;
 import com.jike.common.ServerResponse;
 import com.jike.pojo.User;
@@ -20,6 +21,7 @@ import com.jike.service.IUserService;
 import com.jike.util.CookieUtil;
 import com.jike.util.JsonUtil;
 import com.jike.util.RedisPoolUtil;
+import com.jike.util.RedisShardedPoolUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,7 +47,8 @@ public class UserController {
     	   //session.setAttribute(Const.CURRENT_USER, serverResponse.getData());
     	   //System.out.println(session.getId());
     	   CookieUtil.writeLoginToken(response, session.getId());
-    	   RedisPoolUtil.setEx(session.getId(), JsonUtil.obj2String(serverResponse.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+    	   //RedisPoolUtil.setEx(session.getId(), JsonUtil.obj2String(serverResponse.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+    	   RedisShardedPoolUtil.setEx(session.getId(), JsonUtil.obj2String(serverResponse.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
        }
        return serverResponse;
     }
