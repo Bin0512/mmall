@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -715,6 +716,30 @@ public class OrderServiceImpl implements IOrderService {
         }
         return ServerResponse.createByErrorMessage("订单不存在");
     }
+
+	@Override
+	public void closeOrder(Integer hour) {
+		//1、获取所有超过规定时间且没有支付的订单
+		Date closeDateTime = DateUtils.addHours(new Date(), -hour);
+		List<Order> orderList = orderMapper.selectOrderStatusByCreateTime(Const.OrderStatusEnum.NO_PAY.getCode(), DateTimeUtil.dateToStr(closeDateTime));
+		for (Order order : orderList) {
+			List<OrderItem> orderItems = orderItemMapper.getByOrderNo(order.getOrderNo());
+			for (OrderItem orderItem : orderItems) {
+				Integer stock = productMapper.selectStockByProductId(orderItem.getProductId());
+				//2、更新库存，如果在关闭订单之前，该商品已经被删除了，就不必更新数量了
+				if (stock == null) {
+					continue;
+				}
+				Product product = new Product();
+				product.setId(orderItem.getProductId());
+				product.setStock(stock + orderItem.getQuantity());
+				productMapper.updateByPrimaryKeySelective(product);
+			}
+			//3、更新订单状态
+			orderMapper.closeOrderByOrderId(order.getId());
+			log.info("关闭订单OrderNo：{}",order.getOrderNo());
+		}
+	}
 
 
 

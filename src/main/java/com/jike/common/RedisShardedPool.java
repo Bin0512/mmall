@@ -40,12 +40,14 @@ public class RedisShardedPool {
 	//设置testOnReturn，为true,代表在放回一个jedis实例时，确认是可用的
 	private static Boolean testOnReturn = Boolean.parseBoolean(PropertiesUtil.getProperty("redis.test.return", "true"));
 	
+	
+	//如果想进行redis扩容并使用，可以在用“，”分别对ip和端口进行分割，那么在初始化里，要引用集合遍历ip和端口，并一一对应上，再将info加入到集合中去。
+	
 	//设置redis所在的服务器主机地址
 	private static String redis1Ip = PropertiesUtil.getProperty("redis1.ip");
+	private static String redis2Ip = PropertiesUtil.getProperty("redis2.ip");
 	//设置redis所在服务器开放的端口号
 	private static Integer redis1Port = Integer.parseInt(PropertiesUtil.getProperty("redis1.port"));
-	
-	private static String redis2Ip = PropertiesUtil.getProperty("redis2.ip");
 	private static Integer redis2Port = Integer.parseInt(PropertiesUtil.getProperty("redis2.port"));
 	
 	

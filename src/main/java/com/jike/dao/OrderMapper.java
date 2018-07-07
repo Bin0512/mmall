@@ -1,5 +1,6 @@
 package com.jike.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -26,5 +27,9 @@ public interface OrderMapper {
 	List<Order> selectByUserId(Integer userId);
 
 	List<Order> selectAllOrder();
+	
+	List<Order> selectOrderStatusByCreateTime(@Param("status")Integer status,@Param("date")String date);
+
+	void closeOrderByOrderId(Integer id);
 
 }
